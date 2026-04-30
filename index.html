@@ -163,23 +163,21 @@
   .stat-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,235,224,0.35);font-weight:700;margin-top:6px}
 
   /* ════════════════════════════════════════════════════════
-     QUOTES + TESTIMONIALS COMBINED — one bold dark section
+     TESTIMONIALS — Gold background, black flip cards
   ════════════════════════════════════════════════════════ */
-  /* ════ TUNNEL VOICES — 3D flythrough ════ */
-  .voices{position:relative;overflow:hidden;background:#04060c}
-  #tunnel-canvas{display:block;width:100%;height:460px}
-  .voices-header{position:absolute;top:0;left:0;right:0;z-index:20;padding:44px 48px 0;text-align:center;pointer-events:none}
-  .voices-eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#c8a84b;font-weight:700;margin-bottom:12px}
-  .voices-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;line-height:1.1;color:#f0ebe0;letter-spacing:-0.5px}
-  .voices-title em{font-style:italic;color:#c8a84b}
-  .voices-footer{position:absolute;bottom:0;left:0;right:0;z-index:20;padding:0 0 36px;pointer-events:none}
-  .tunnel-quote-overlay{text-align:center;padding:0 80px}
-  .tunnel-quote-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:rgba(240,235,224,0.92);line-height:1.45;margin-bottom:10px;text-shadow:0 2px 24px rgba(0,0,0,0.9)}
-  .tunnel-quote-author{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#c8a84b;font-weight:700}
-  .tunnel-quote-role{font-size:10px;color:rgba(240,235,224,0.45);margin-top:3px;font-style:italic;font-family:'Cormorant Garamond',serif}
-  .tunnel-dots{display:flex;gap:7px;justify-content:center;margin-top:14px}
-  .tunnel-dot{width:6px;height:6px;border-radius:50%;background:rgba(240,235,224,0.2);cursor:pointer;transition:all 0.2s;pointer-events:all}
-  .tunnel-dot.active{background:#c8a84b;transform:scale(1.5)}
+  .testimonials-section{background:#c8a84b;padding:80px 48px 90px}
+  .ts-header{text-align:center;margin-bottom:56px;min-height:90px}
+  .ts-word{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,86px);font-weight:300;letter-spacing:14px;color:#0d1020;text-transform:uppercase;display:inline}
+  .ts-cursor{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,86px);font-weight:300;color:#0d1020;animation:tsBlink 0.7s step-end infinite;vertical-align:middle}
+  @keyframes tsBlink{0%,100%{opacity:1}50%{opacity:0}}
+  .ts-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1280px;margin:0 auto;perspective:1400px}
+  .ts-card{background:#0d1020;padding:38px 32px 32px;border-radius:2px;transform:rotateY(-90deg);opacity:0;transition:transform 0.75s cubic-bezier(0.23,1,0.32,1),opacity 0.5s ease;transform-origin:left center;border-top:3px solid #c8a84b}
+  .ts-card.in{transform:rotateY(0deg);opacity:1}
+  .ts-qmark{font-family:'Cormorant Garamond',serif;font-size:72px;color:rgba(200,168,75,0.2);line-height:0.6;margin-bottom:16px;display:block}
+  .ts-quote{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(240,235,224,0.92);line-height:1.65;margin-bottom:24px}
+  .ts-divider{width:40px;height:1px;background:#c8a84b;margin-bottom:16px}
+  .ts-author{font-size:13px;font-weight:700;color:#f0ebe0;letter-spacing:0.5px;margin-bottom:4px}
+  .ts-role{font-size:10px;letter-spacing:2px;color:#c8a84b;text-transform:uppercase;font-weight:600}
 
   /* ════════════════════════════════════════════════════════
      CAREERS + CONTACT — Cinematic Dark · 3D Network · Gold
@@ -456,28 +454,53 @@
   </div>
 </section>
 
-<!-- VOICES — 3D TUNNEL FLYTHROUGH -->
-<section class="voices" id="voices">
-  <!-- Three.js tunnel canvas — fills the section -->
-  <canvas id="tunnel-canvas"></canvas>
-
-  <!-- Header overlay (top) -->
-  <div class="voices-header">
-    <div class="voices-eyebrow">Voices from the Floor</div>
-    <div class="voices-title">Why people stay. <em>Why people grow.</em></div>
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="voices">
+  <div class="ts-header">
+    <span class="ts-word" id="ts-word"></span><span class="ts-cursor" id="ts-cursor">|</span>
   </div>
-
-  <!-- Quote overlay (bottom) -->
-  <div class="voices-footer">
-    <div class="tunnel-quote-overlay" id="tunnel-quotes">
-      <div class="tunnel-quote-text" id="tq-text">"We've always believed that the heart of our business lies in the people we serve."</div>
-      <div class="tunnel-quote-author" id="tq-author">George Estep</div>
-      <div class="tunnel-quote-role" id="tq-role">Founder · Columbus, Indiana</div>
+  <div class="ts-cards">
+    <div class="ts-card">
+      <span class="ts-qmark">"</span>
+      <div class="ts-quote">I've been with this company twenty years. Started as a teenager — they let me grow. That doesn't happen everywhere.</div>
+      <div class="ts-divider"></div>
+      <div class="ts-author">Marcus R.</div>
+      <div class="ts-role">General Manager · Louisville</div>
     </div>
-    <div class="tunnel-dots" id="tunnel-dots">
-      <div class="tunnel-dot active" data-i="0"></div>
-      <div class="tunnel-dot" data-i="1"></div>
-      <div class="tunnel-dot" data-i="2"></div>
+    <div class="ts-card">
+      <span class="ts-qmark">"</span>
+      <div class="ts-quote">Estep gave me my first real job. I've watched them turn kids into leaders for fifteen years.</div>
+      <div class="ts-divider"></div>
+      <div class="ts-author">Janelle Jordan</div>
+      <div class="ts-role">DM · Indiana Region</div>
+    </div>
+    <div class="ts-card">
+      <span class="ts-qmark">"</span>
+      <div class="ts-quote">I came for a summer job. Stayed for the team. They actually mean what they say about people.</div>
+      <div class="ts-divider"></div>
+      <div class="ts-author">Priya Shah</div>
+      <div class="ts-role">Manager · Tampa</div>
+    </div>
+    <div class="ts-card">
+      <span class="ts-qmark">"</span>
+      <div class="ts-quote">Best decision I made was joining. Best thing they did was promote me when I wasn't sure I was ready.</div>
+      <div class="ts-divider"></div>
+      <div class="ts-author">Daniel Ortiz</div>
+      <div class="ts-role">Director · Operations</div>
+    </div>
+    <div class="ts-card">
+      <span class="ts-qmark">"</span>
+      <div class="ts-quote">Started behind the counter at 16. Running three locations now. That's the Estep way.</div>
+      <div class="ts-divider"></div>
+      <div class="ts-author">Tom Burns</div>
+      <div class="ts-role">Senior Operations</div>
+    </div>
+    <div class="ts-card">
+      <span class="ts-qmark">"</span>
+      <div class="ts-quote">Other companies talk culture. Estep builds it. I've never felt more part of something.</div>
+      <div class="ts-divider"></div>
+      <div class="ts-author">Keisha Roberts</div>
+      <div class="ts-role">Area Supervisor · Florida</div>
     </div>
   </div>
 </section>
@@ -912,218 +935,35 @@ function toggleChat() {
   window.addEventListener('resize', drawAllCities);
 })();
 
-// ════════ THREE.JS TUNNEL — Cards fly toward you ════════
+// ════════ TESTIMONIALS — Typewriter + Card Flip ════════
 (function() {
-  const canvas = document.getElementById('tunnel-canvas');
-  if (!canvas || typeof THREE === 'undefined') return;
+  const wordEl   = document.getElementById('ts-word');
+  const cursorEl = document.getElementById('ts-cursor');
+  const section  = document.getElementById('voices');
+  const cards    = document.querySelectorAll('.ts-card');
+  if (!wordEl || !section || !cards.length) return;
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x060f08, 1);
+  const WORD = 'TESTIMONIALS';
+  let started = false;
 
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x060f08, 0.030);
-
-  const camera = new THREE.PerspectiveCamera(80, 2, 0.1, 120);
-  camera.position.set(0, 0, 0);
-
-  // ── TUNNEL RINGS ──
-  const RING_COUNT = 36, RING_SPACING = 3.8;
-  const rings = [];
-  for (let i = 0; i < RING_COUNT; i++) {
-    const isAccent = i % 5 === 0;
-    const geo = new THREE.TorusGeometry(4.0, isAccent ? 0.06 : 0.025, 8, 64);
-    const mat = new THREE.MeshBasicMaterial({
-      color: isAccent ? 0x6ab04c : 0x1a5228,
-      transparent: true,
-      opacity: isAccent ? 0.55 : 0.25
-    });
-    const ring = new THREE.Mesh(geo, mat);
-    ring.position.z = -(i * RING_SPACING);
-    rings.push(ring);
-    scene.add(ring);
-  }
-
-  // ── PARTICLES on tunnel walls ──
-  const pPos = [];
-  for (let i = 0; i < 400; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const r = 3.7 + (Math.random() - 0.5) * 0.5;
-    pPos.push(Math.cos(angle) * r, Math.sin(angle) * r, -(Math.random() * RING_COUNT * RING_SPACING));
-  }
-  const pGeo = new THREE.BufferGeometry();
-  pGeo.setAttribute('position', new THREE.Float32BufferAttribute(pPos, 3));
-  scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0xc8a84b, size: 0.05, transparent: true, opacity: 0.65 })));
-
-  // ── CARD CANVAS TEXTURE BUILDER ──
-  function wrapText(ctx, txt, x, y, maxW, lh) {
-    const words = txt.split(' ');
-    let line = '', rows = [];
-    words.forEach(w => {
-      const test = line + w + ' ';
-      if (ctx.measureText(test).width > maxW && line) { rows.push(line.trim()); line = w + ' '; }
-      else line = test;
-    });
-    rows.push(line.trim());
-    rows.forEach((r, i) => ctx.fillText(r, x, y + i * lh));
-    return rows.length;
-  }
-
-  function rr(ctx, x, y, w, h, r) {
-    ctx.beginPath();
-    ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y);
-    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-    ctx.lineTo(x + w, y + h - r);
-    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-    ctx.lineTo(x + r, y + h);
-    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-    ctx.lineTo(x, y + r);
-    ctx.quadraticCurveTo(x, y, x + r, y);
-    ctx.closePath();
-  }
-
-  function makeCard(t) {
-    const cv = document.createElement('canvas');
-    cv.width = 640; cv.height = 360;
-    const ctx = cv.getContext('2d');
-
-    // ── outer glow shadow ──
-    ctx.shadowColor = 'rgba(106,176,76,0.35)'; ctx.shadowBlur = 28; ctx.shadowOffsetY = 0;
-    // ── dark navy base ──
-    ctx.fillStyle = '#10243a'; rr(ctx,8,8,624,344,16); ctx.fill();
-    ctx.shadowBlur = 0;
-
-    // ── diagonal accent slash (top-right corner graphic element) ──
-    ctx.save();
-    ctx.beginPath();
-    rr(ctx,8,8,624,344,16);
-    ctx.clip();
-    // top-right corner triangle
-    ctx.fillStyle = 'rgba(200,168,75,0.10)';
-    ctx.beginPath(); ctx.moveTo(640,0); ctx.lineTo(400,0); ctx.lineTo(640,200); ctx.closePath(); ctx.fill();
-    // bottom-left dim triangle
-    ctx.fillStyle = 'rgba(0,0,0,0.18)';
-    ctx.beginPath(); ctx.moveTo(0,360); ctx.lineTo(220,360); ctx.lineTo(0,160); ctx.closePath(); ctx.fill();
-    ctx.restore();
-
-    // ── left color bar ──
-    ctx.fillStyle = '#c8a84b';
-    ctx.beginPath(); ctx.moveTo(8,24); ctx.lineTo(8,336); ctx.quadraticCurveTo(8,352,24,352); ctx.lineTo(22,352); ctx.quadraticCurveTo(8,352,8,336); ctx.closePath();
-    rr(ctx,8,8,6,344,16); ctx.fill();
-
-    // ── big ghost quote mark ──
-    ctx.fillStyle = 'rgba(200,168,75,0.11)';
-    ctx.font = 'bold 180px Georgia,serif'; ctx.fillText('“', 20, 170);
-
-    // ── green accent line under top bar ──
-    ctx.strokeStyle = 'rgba(200,168,75,0.28)'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(34,56); ctx.lineTo(608,56); ctx.stroke();
-
-    // ── quote text ──
-    ctx.fillStyle = '#f0f4ec';
-    ctx.font = 'italic 20px Georgia,serif';
-    const nL = wrapText(ctx, t.quote, 42, 90, 564, 32);
-
-    // ── divider ──
-    const divY = 90 + nL * 32 + 20;
-    ctx.strokeStyle = 'rgba(200,168,75,0.4)'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(42, divY); ctx.lineTo(340, divY); ctx.stroke();
-
-    // ── author ──
-    ctx.fillStyle = '#f0f4ec'; ctx.font = 'bold 16px Arial,sans-serif';
-    ctx.fillText(t.author, 42, divY + 26);
-    // ── role in green ──
-    ctx.fillStyle = '#c8a84b'; ctx.font = '11px Arial,sans-serif';
-    ctx.fillText(t.role.toUpperCase(), 42, divY + 44);
-
-    // ── small estep & mark top-right ──
-    ctx.fillStyle = 'rgba(200,168,75,0.55)';
-    ctx.font = 'italic bold 28px “DM Serif Display”,serif';
-    ctx.fillText('&', 592, 38);
-
-    return new THREE.CanvasTexture(cv);
-  }
-
-  // ── CARD DATA ──
-  const testimonials = [
-    { quote: "I've been with this company twenty years. Started as a teenager — they let me grow. That doesn't happen everywhere.", author: "Marcus R.", role: "General Manager · Louisville" },
-    { quote: "Estep gave me my first real job. I've watched them turn kids into leaders for fifteen years.", author: "Janelle Jordan", role: "DM · Indiana Region" },
-    { quote: "I came for a summer job. Stayed for the team. They actually mean what they say about people.", author: "Priya Shah", role: "Manager · Tampa" },
-    { quote: "Best decision I made was joining. Best thing they did was promote me when I wasn't sure I was ready.", author: "Daniel Ortiz", role: "Director · Operations" },
-    { quote: "Started behind the counter at 16. Running three locations now. That's the Estep way.", author: "Tom Burns", role: "Senior Operations" },
-    { quote: "Other companies talk culture. Estep builds it. I've never felt more part of something.", author: "Keisha Roberts", role: "Area Supervisor · Florida" },
-  ];
-
-  // Spread positions — varied within the tunnel
-  const spreads = [
-    { x: 0,    y: 0.1,  ry: 0 },
-    { x: -1.5, y: 0.5,  ry: 0.2 },
-    { x: 1.5,  y: -0.4, ry: -0.2 },
-    { x: 0.7,  y: 0.9,  ry: -0.1 },
-    { x: -0.8, y: -0.7, ry: 0.15 },
-    { x: 0.3,  y: -0.3, ry: 0.06 },
-  ];
-
-  const CARD_SPACING = 5;
-  const TOTAL_Z = testimonials.length * CARD_SPACING;
-  const cardData = testimonials.map((t, i) => {
-    const sp = spreads[i % spreads.length];
-    const geo = new THREE.PlaneGeometry(5.8, 3.26);
-    const mat = new THREE.MeshBasicMaterial({ map: makeCard(t), transparent: true, depthWrite: false });
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set(sp.x, sp.y, -(i * CARD_SPACING) - 1);
-    mesh.rotation.y = sp.ry;
-    scene.add(mesh);
-    return { mesh, ...sp };
-  });
-
-  // ── RESIZE ──
-  function resize() {
-    const w = canvas.offsetWidth, h = canvas.offsetHeight;
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // ── ANIMATE ──
-  const SPEED = 0.015;
-  let running = true;
-  new IntersectionObserver(([e]) => { running = e.isIntersecting; }).observe(canvas);
-
-  function animate() {
-    requestAnimationFrame(animate);
-    if (!running) return;
-    const now = Date.now() * 0.001;
-
-    cardData.forEach(({ mesh, x, y, ry }) => {
-      mesh.position.z += SPEED;
-      mesh.position.y = y + Math.sin(now * 0.4 + mesh.position.z * 0.08) * 0.09;
-      mesh.rotation.x = Math.sin(now * 0.28 + mesh.position.z * 0.04) * 0.022;
-      // fade in from behind, pop into full view, fade out as they pass camera
-      const z = mesh.position.z;
-      if (z < -18) mesh.material.opacity = Math.max(0, (z + 24) / 6);
-      else if (z < 0.8) mesh.material.opacity = 1;
-      else mesh.material.opacity = Math.max(0, 1 - (z - 0.8) * 3.5);
-      if (z > 2.5) { mesh.position.z -= TOTAL_Z; mesh.material.opacity = 0; }
-    });
-
-    rings.forEach(r => {
-      r.position.z += SPEED;
-      if (r.position.z > 5) r.position.z -= RING_COUNT * RING_SPACING;
-    });
-
-    const pa = pGeo.attributes.position.array;
-    for (let i = 2; i < pa.length; i += 3) {
-      pa[i] += SPEED;
-      if (pa[i] > 5) pa[i] -= RING_COUNT * RING_SPACING;
+  function typeWord(done) {
+    let i = 0;
+    function tick() {
+      wordEl.textContent = WORD.slice(0, ++i);
+      if (i < WORD.length) setTimeout(tick, 75);
+      else if (done) setTimeout(done, 280);
     }
-    pGeo.attributes.position.needsUpdate = true;
-
-    renderer.render(scene, camera);
+    tick();
   }
-  animate();
+
+  new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting || started) return;
+    started = true;
+    typeWord(() => {
+      if (cursorEl) cursorEl.style.display = 'none';
+      cards.forEach((card, i) => setTimeout(() => card.classList.add('in'), i * 180));
+    });
+  }, { threshold: 0.2 }).observe(section);
 })();
 
 // Hero amp is now CSS — no Three.js needed here
