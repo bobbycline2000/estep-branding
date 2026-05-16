@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estep & Company — 3 Iterations of the Finished Site</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#f0ebe0;min-height:100vh}
+  header{padding:60px 8% 30px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.08)}
+  h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;letter-spacing:8px;color:#fff;text-transform:uppercase}
+  h1 .amp{font-style:italic;color:#c8a84b;margin:0 12px}
+  .lede{margin-top:16px;font-size:14px;color:rgba(255,255,255,0.55);letter-spacing:2px;text-transform:uppercase}
+  .rec{margin-top:28px;display:inline-block;background:rgba(200,168,75,0.12);border:1px solid rgba(200,168,75,0.5);color:#c8a84b;padding:10px 26px;border-radius:4px;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600}
+  main{padding:50px 6%;display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
+  @media (max-width:1100px){main{grid-template-columns:1fr;gap:48px}}
+  .card{background:#11141a;border:1px solid rgba(255,255,255,0.08);border-radius:8px;overflow:hidden;transition:transform 0.25s,border-color 0.25s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-4px);border-color:rgba(200,168,75,0.4)}
+  .swatch{height:280px;position:relative;overflow:hidden}
+  .swatch.v1{background:linear-gradient(135deg,#f5ede1 0%,#a83232 55%,#1a0f0d 100%)}
+  .swatch.v2{background:linear-gradient(135deg,#f3efe6 0%,#0e3b3a 55%,#0b1f1e 100%)}
+  .swatch.v3{background:linear-gradient(135deg,#7a8c9f 0%,#ff8b25 55%,#0a0c10 100%)}
+  .swatch .label{position:absolute;left:24px;bottom:22px;color:#fff;font-family:'Cormorant Garamond',serif;font-size:34px;letter-spacing:5px;text-transform:uppercase;text-shadow:0 2px 24px rgba(0,0,0,0.6)}
+  .swatch .num{position:absolute;right:24px;top:18px;color:rgba(255,255,255,0.95);font-family:'Cormorant Garamond',serif;font-size:74px;font-style:italic;line-height:1;text-shadow:0 2px 24px rgba(0,0,0,0.55)}
+  .body{padding:26px 26px 30px;flex:1;display:flex;flex-direction:column}
+  .title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#fff;margin-bottom:6px}
+  .mood{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c8a84b;margin-bottom:18px}
+  .row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed rgba(255,255,255,0.06);font-size:13px}
+  .row:last-of-type{border-bottom:none}
+  .row .k{color:rgba(255,255,255,0.45)}
+  .row .v{color:#e8e0c9;text-align:right;max-width:62%}
+  .dots{display:inline-flex;gap:6px;vertical-align:middle}
+  .dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(255,255,255,0.18)}
+  .open{margin-top:auto;padding-top:22px}
+  .btn{display:block;text-align:center;background:#c8a84b;color:#0a0a0a;padding:13px 0;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;border-radius:4px;transition:background 0.15s}
+  .btn:hover{background:#e0bf5a}
+  footer{padding:40px 8% 60px;text-align:center;color:rgba(255,255,255,0.35);font-size:12px;letter-spacing:1px;border-top:1px solid rgba(255,255,255,0.06)}
+  footer a{color:#c8a84b;text-decoration:none}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Estep <span class="amp">&amp;</span> Company</h1>
+  <div class="lede">3 Iterations of the Finished Site</div>
+  <div class="rec">Recommendation: V3 Midnight Foundry</div>
+</header>
+
+<main>
+
+  <article class="card">
+    <div class="swatch v1">
+      <div class="num">I</div>
+      <div class="label">Crimson</div>
+    </div>
+    <div class="body">
+      <div class="title">Crimson Kitchen</div>
+      <div class="mood">Warm · Handcrafted · Visceral</div>
+      <div class="row"><span class="k">Palette</span><span class="v"><span class="dots"><span class="dot" style="background:#f5ede1"></span><span class="dot" style="background:#a83232"></span><span class="dot" style="background:#1a0f0d"></span><span class="dot" style="background:#c97f4a"></span></span></span></div>
+      <div class="row"><span class="k">Food mood</span><span class="v">Cast-iron griddle action, smoke, artisan bread</span></div>
+      <div class="row"><span class="k">3D treatment</span><span class="v">Rising ember particle field, swirling spice dust</span></div>
+      <div class="row"><span class="k">Typography</span><span class="v">Same Cormorant + Inter, crimson serif accents</span></div>
+      <div class="open"><a class="btn" href="v1/" target="_blank">Open Crimson Kitchen →</a></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="swatch v2">
+      <div class="num">II</div>
+      <div class="label">Coastal</div>
+    </div>
+    <div class="body">
+      <div class="title">Coastal Brand House</div>
+      <div class="mood">Cool · Editorial · Aspirational</div>
+      <div class="row"><span class="k">Palette</span><span class="v"><span class="dots"><span class="dot" style="background:#f3efe6"></span><span class="dot" style="background:#0e3b3a"></span><span class="dot" style="background:#0b1f1e"></span><span class="dot" style="background:#b87333"></span></span></span></div>
+      <div class="row"><span class="k">Food mood</span><span class="v">Overhead flat-lay, magazine-clean, restaurant editorial</span></div>
+      <div class="row"><span class="k">3D treatment</span><span class="v">Flowing liquid-ribbon wave, slow wireframe globe</span></div>
+      <div class="row"><span class="k">Typography</span><span class="v">Same Cormorant + Inter, teal serif on light, copper on dark</span></div>
+      <div class="open"><a class="btn" href="v2/" target="_blank">Open Coastal Brand House →</a></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="swatch v3">
+      <div class="num">III</div>
+      <div class="label">Foundry</div>
+    </div>
+    <div class="body">
+      <div class="title">Midnight Foundry</div>
+      <div class="mood">Industrial · Premium · High Contrast</div>
+      <div class="row"><span class="k">Palette</span><span class="v"><span class="dots"><span class="dot" style="background:#1a1c20"></span><span class="dot" style="background:#0a0c10"></span><span class="dot" style="background:#ff8b25"></span><span class="dot" style="background:#7a8c9f"></span></span></span></div>
+      <div class="row"><span class="k">Food mood</span><span class="v">Noir chiaroscuro, single-source lighting, smoke + shadow</span></div>
+      <div class="row"><span class="k">3D treatment</span><span class="v">Forge-spark burst, animated city network graph</span></div>
+      <div class="row"><span class="k">Typography</span><span class="v">Same Cormorant + Inter, amber serif on charcoal</span></div>
+      <div class="open"><a class="btn" href="v3/" target="_blank">Open Midnight Foundry →</a></div>
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  Canonical site: <a href="../" target="_blank">bobbycline2000.github.io/estep-branding/</a> · Pick one to lock and I'll do 3 color variations of that direction next.
+</footer>
+
+</body>
+</html>
