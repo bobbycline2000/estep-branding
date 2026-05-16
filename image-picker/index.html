@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estep — Pick the Photos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#06080f;color:#f0ebe0;min-height:100vh;padding-bottom:80px}
+
+  header{padding:50px 6% 24px;border-bottom:1px solid rgba(200,168,75,0.18);position:sticky;top:0;background:rgba(6,8,15,0.96);backdrop-filter:blur(14px);z-index:10}
+  h1{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;letter-spacing:8px;color:#fff;text-transform:uppercase}
+  h1 .amp{font-style:italic;color:#c8a84b;margin:0 10px}
+  .lede{margin-top:10px;font-size:13px;color:rgba(255,255,255,0.55);letter-spacing:2px;text-transform:uppercase}
+  .how{margin-top:18px;font-size:14px;color:#c8a84b;max-width:900px;line-height:1.6}
+  .how b{color:#fff;font-weight:600}
+
+  .brand-section{padding:48px 6% 12px}
+  .brand-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;border-bottom:1px dashed rgba(200,168,75,0.22);padding-bottom:14px}
+  .brand-name{font-family:'Cormorant Garamond',serif;font-size:32px;letter-spacing:4px;text-transform:uppercase;color:#fff}
+  .brand-name .what{font-size:13px;letter-spacing:2px;color:rgba(255,255,255,0.5);margin-left:18px;font-family:'Inter',sans-serif;text-transform:none;font-weight:400}
+  .brand-count{font-size:12px;letter-spacing:2px;color:#c8a84b;text-transform:uppercase}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:22px}
+
+  .card{background:#0d1020;border:1px solid rgba(255,255,255,0.08);border-radius:6px;overflow:hidden;transition:transform 0.2s,border-color 0.2s,box-shadow 0.2s;cursor:pointer;position:relative}
+  .card:hover{transform:translateY(-4px);border-color:#c8a84b;box-shadow:0 12px 36px rgba(200,168,75,0.18)}
+  .card.current{border-color:#22c55e}
+  .card.current::after{content:'IN USE NOW';position:absolute;top:12px;right:12px;background:#22c55e;color:#06080f;font-size:9px;font-weight:700;letter-spacing:1.5px;padding:4px 9px;border-radius:3px;z-index:3}
+  .card.selected{border-color:#c8a84b;border-width:2px;box-shadow:0 0 0 3px rgba(200,168,75,0.25)}
+  .card.selected::before{content:'✓ PICKED';position:absolute;top:12px;left:12px;background:#c8a84b;color:#06080f;font-size:9px;font-weight:700;letter-spacing:1.5px;padding:4px 9px;border-radius:3px;z-index:3}
+
+  .thumb{width:100%;height:280px;background:#000 no-repeat center / cover;display:block}
+  .meta{padding:14px 16px 18px}
+  .label{font-size:13px;color:#fff;font-weight:600;margin-bottom:4px}
+  .id{font-size:10px;color:rgba(255,255,255,0.35);font-family:'Courier New',monospace;letter-spacing:0.5px;word-break:break-all}
+
+  .picks-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(13,16,32,0.96);backdrop-filter:blur(14px);border-top:1px solid #c8a84b;padding:14px 6%;display:flex;align-items:center;gap:18px;z-index:20;font-size:13px}
+  .picks-bar .count{color:#c8a84b;font-weight:700;font-size:16px;letter-spacing:1px}
+  .picks-bar .picks{color:rgba(255,255,255,0.75);flex:1;font-family:'Courier New',monospace;font-size:11px;word-break:break-all}
+  .picks-bar button{background:#c8a84b;color:#06080f;border:none;padding:10px 20px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border-radius:4px;cursor:pointer;flex-shrink:0}
+  .picks-bar button:hover{background:#e0bf5a}
+  .picks-bar .clear{background:transparent;color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.2)}
+  .picks-bar .clear:hover{background:rgba(255,255,255,0.08);color:#fff}
+
+  .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.95);display:none;align-items:center;justify-content:center;z-index:100;padding:40px;cursor:zoom-out}
+  .lightbox.on{display:flex}
+  .lightbox img{max-width:100%;max-height:100%;box-shadow:0 0 40px rgba(0,0,0,0.6)}
+
+  @media (max-width:700px){
+    h1{font-size:28px;letter-spacing:5px}
+    .grid{grid-template-columns:1fr}
+    .picks-bar{flex-direction:column;align-items:stretch}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Estep <span class="amp">&amp;</span> Co — Pick the Photos</h1>
+  <div class="lede">Brand-only food &amp; kitchen images for the website</div>
+  <div class="how">
+    <b>How this works:</b> Each photo is fully visible. <b>Click any photo to select it</b> (gold ✓). Click again to unselect. Click the photo thumbnail itself (small zoom icon) to see full size. Green "IN USE NOW" = on the live site today. When you're done picking, copy the list from the gold bar at the bottom and paste it back to me in chat — I'll swap them in.
+  </div>
+</header>
+
+<section class="brand-section">
+  <div class="brand-head"><div class="brand-name">Five Guys <span class="what">— burgers, fries, smash & cast iron</span></div><div class="brand-count">4 OPTIONS</div></div>
+  <div class="grid" id="grid-fg"></div>
+</section>
+
+<section class="brand-section">
+  <div class="brand-head"><div class="brand-name">Subway <span class="what">— subs, sandwich line, fresh bread</span></div><div class="brand-count">4 OPTIONS</div></div>
+  <div class="grid" id="grid-sub"></div>
+</section>
+
+<section class="brand-section">
+  <div class="brand-head"><div class="brand-name">Dave's Hot Chicken <span class="what">— sliders, tenders, hot chicken sandos</span></div><div class="brand-count">4 OPTIONS</div></div>
+  <div class="grid" id="grid-dave"></div>
+</section>
+
+<section class="brand-section">
+  <div class="brand-head"><div class="brand-name">Careers / Kitchen <span class="what">— team in motion, open kitchen, action</span></div><div class="brand-count">3 OPTIONS</div></div>
+  <div class="grid" id="grid-careers"></div>
+</section>
+
+<div class="picks-bar">
+  <span class="count" id="picksCount">0 picked</span>
+  <span class="picks" id="picksList">Click photos above to pick them.</span>
+  <button id="copyBtn">Copy Picks</button>
+  <button class="clear" id="clearBtn">Clear</button>
+</div>
+
+<div class="lightbox" id="lb"><img id="lbImg" alt=""></div>
+
+<script>
+const PHOTOS = {
+  fg: [
+    { id: '1568901346375-23c9450c58cd', label: 'Smashed double cheeseburger w/ bacon + lettuce', current: true },
+    { id: '1586190848861-99aa4a171e90', label: 'Smash burger close-up, cast-iron mood' },
+    { id: '1550317138-10000687a72b',   label: 'Cup of fries, sea salt, peanut-oil sheen' },
+    { id: '1576107232684-1279f390859f', label: 'Diner-style burger + fries plated' },
+  ],
+  sub: [
+    { id: '1509722747041-616f39b57569', label: 'Italian sub overhead, generous toppings', current: true },
+    { id: '1626700051175-6818013e1d4f', label: 'Sub cross-section, fresh-cut veggies' },
+    { id: '1553909489-cd47e0907980',   label: 'Footlong on butcher paper' },
+    { id: '1539252554453-80ab65ce3586', label: 'Toasted sub w/ cheese pull' },
+  ],
+  dave: [
+    { id: '1562967914-608f82629710', label: 'Hot chicken w/ pickles, bright', current: true },
+    { id: '1610614819513-58e34989848b', label: 'Nashville hot slider, white bread + pickles' },
+    { id: '1626645738196-c2a7c87a8f86', label: 'Crispy tenders, signature crackle' },
+    { id: '1606755962773-d324e0a13086', label: 'Hot chicken sandwich, dramatic shadow' },
+  ],
+  careers: [
+    { id: '1600880292203-757bb62b4baf', label: 'Open kitchen wide shot (current careers bg)', current: true },
+    { id: '1577303935007-0d306ee638cf', label: 'Chef at the line, action shot' },
+    { id: '1556909114-f6e7ad7d3136',   label: 'Open kitchen w/ managers' },
+  ],
+};
+
+const PICKED = new Set();
+
+function url(id){ return 'https://images.unsplash.com/photo-' + id + '?w=1200&auto=format&fit=crop&q=85'; }
+function urlFull(id){ return 'https://images.unsplash.com/photo-' + id + '?w=2400&auto=format&fit=crop&q=92'; }
+
+function render(group, key) {
+  const grid = document.getElementById('grid-' + key);
+  group.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card' + (p.current ? ' current' : '');
+    card.dataset.id = p.id;
+    card.innerHTML =
+      '<div class="thumb" style="background-image:url(' + url(p.id) + ')" data-full="' + urlFull(p.id) + '"></div>' +
+      '<div class="meta">' +
+        '<div class="label">' + p.label + '</div>' +
+        '<div class="id">photo-' + p.id + '</div>' +
+      '</div>';
+    card.addEventListener('click', e => {
+      // thumb click → lightbox
+      if (e.target.classList.contains('thumb')) {
+        showLB(e.target.dataset.full);
+        return;
+      }
+      // anywhere else → pick toggle
+      if (PICKED.has(p.id)) { PICKED.delete(p.id); card.classList.remove('selected'); }
+      else { PICKED.add(p.id); card.classList.add('selected'); }
+      updateBar();
+    });
+    grid.appendChild(card);
+  });
+}
+
+function updateBar() {
+  document.getElementById('picksCount').textContent = PICKED.size + ' picked';
+  if (PICKED.size === 0) {
+    document.getElementById('picksList').textContent = 'Click photos above to pick them.';
+  } else {
+    document.getElementById('picksList').textContent = Array.from(PICKED).join(', ');
+  }
+}
+
+function showLB(src) {
+  const lb = document.getElementById('lb');
+  document.getElementById('lbImg').src = src;
+  lb.classList.add('on');
+}
+document.getElementById('lb').addEventListener('click', () => document.getElementById('lb').classList.remove('on'));
+
+document.getElementById('copyBtn').addEventListener('click', async () => {
+  const text = Array.from(PICKED).join(', ');
+  if (!text) { alert('Nothing picked yet.'); return; }
+  try {
+    await navigator.clipboard.writeText(text);
+    document.getElementById('copyBtn').textContent = 'Copied!';
+    setTimeout(() => { document.getElementById('copyBtn').textContent = 'Copy Picks'; }, 1500);
+  } catch (e) {
+    prompt('Copy this list:', text);
+  }
+});
+
+document.getElementById('clearBtn').addEventListener('click', () => {
+  PICKED.clear();
+  document.querySelectorAll('.card.selected').forEach(c => c.classList.remove('selected'));
+  updateBar();
+});
+
+render(PHOTOS.fg,      'fg');
+render(PHOTOS.sub,     'sub');
+render(PHOTOS.dave,    'dave');
+render(PHOTOS.careers, 'careers');
+</script>
+
+</body>
+</html>
